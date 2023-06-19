@@ -1,4 +1,4 @@
-# [Test technique] Développeur Front-End
+# Delight - Développeur Front-End
 
 Dans le cadre de notre test technique, nous te demandons de réaliser une page web constituée:
 
@@ -18,6 +18,7 @@ Voici de plus les contraintes liées à ce projet:
     - langues officielles
     - préfixes téléphoniques
 
+*********************************
 
 # Vue 3 + TypeScript + Vite
 
