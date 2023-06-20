@@ -1,21 +1,17 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-import { useQuery } from '@vue/apollo-composable'
-import gql from 'graphql-tag'
+import { computed } from "vue";
+import { useQuery } from "@vue/apollo-composable";
+import gql from "graphql-tag";
 // ui components:
-import { NSpin, NSpace } from 'naive-ui'
-// components:
-import CountrySelect from './components/CountrySelect.vue'
-import CountryDetails from './components/CountryDetails.vue'
-
+import { NSpin } from "naive-ui";
 // props:
 const props = defineProps({
   code: String,
-})
+});
 
 const variables = computed(() => ({
   code: props.code,
-}))
+}));
 
 const { result, loading } = useQuery(
   gql`
@@ -33,38 +29,52 @@ const { result, loading } = useQuery(
     }
   `,
   variables
-)
+);
 </script>
 
-<template>
+<template id="country-details">
   <div class="container">
-    <div v-if="!code">Please select a country</div>
+    <div class="code" v-if="!code">Please select a country</div>
     <template v-else>
       <NSpin v-if="loading" />
-      <div v-else-if="result.country">
-        <img :src="`https://flagsapi.com/${code}/flat/64.png`" />
-        <h1>{{ result.country.name }}</h1>
-        <h3>Capital:</h3>
+      <div class="result" v-else-if="result.country">
+        <div>
+          <img :src="`https://flagsapi.com/${code}/flat/64.png`" />
+        </div>
+        <h1 class="h1">{{ result.country.name }}</h1>
+        <h3 class="h3">Capital:</h3>
         <ul>
-          <li>
+          <li class="li-capital">
             {{ result.country.capital }}
           </li>
         </ul>
         <h3>Currencies:</h3>
         <ul>
-          <li v-for="currency in result.country.currencies" :key="currency">
+          <li
+            class="li-currencies"
+            v-for="currency in result.country.currencies"
+            :key="currency"
+          >
             {{ currency }}
           </li>
         </ul>
         <h3>Languages:</h3>
         <ul>
-          <li v-for="language in result.country.languages" :key="language.code">
+          <li
+            class="languages"
+            v-for="language in result.country.languages"
+            :key="language.code"
+          >
             {{ language.code }} - {{ language.name }}
           </li>
         </ul>
         <h3>Telephone prefixes:</h3>
         <ul>
-          <li v-for="phone in result.country.phones" :key="phone">
+          <li
+            class="li-phones"
+            v-for="phone in result.country.phones"
+            :key="phone"
+          >
             {{ phone }}
           </li>
         </ul>
@@ -74,9 +84,13 @@ const { result, loading } = useQuery(
 </template>
 
 <style scoped>
-.container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+img{display:block; margin-left: auto; margin-right: auto;width: 50%;}
+.container {display: flex;align-items: center;justify-content: center;}
+.code {background-color: #f2b807;padding: 6px;text-align: center;color: #3d8e78;border-radius: 4px;}
+.h1 {color: #e42342; text-align: center;}
+.li-capital {background-color: #f2b807;text-align: center;color: #fff;border-radius: 4px;}
+.languages {background-color: #4db097;text-align: center;color: #fff; margin-bottom: 4px;border-radius: 4px;}
+.li-currencies {background-color: #b31271;margin-bottom: 4px;text-align: center;color: #fff;border-radius: 4px;}
+.li-phones {
+  background-color: #010101;margin-bottom: 4px;text-align: center;color: #fff;border-radius: 4px;}
 </style>

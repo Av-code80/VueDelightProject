@@ -1,14 +1,19 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
-import { useQuery } from '@vue/apollo-composable'
-import gql from 'graphql-tag'
+import { ref, computed, onMounted } from "vue";
+import { useQuery } from "@vue/apollo-composable";
+import gql from "graphql-tag";
 // ui components:
-import { NSelect } from 'naive-ui'
+import { NSelect } from "naive-ui";
+
+interface stringQueries {
+  name: string;
+  code: string;
+}
 
 // emits:
-const emit = defineEmits(['select'])
+const emit = defineEmits(["select"]);
 
-const input = ref('')
+const input = ref("");
 
 const { result, loading } = useQuery(
   gql`
@@ -18,28 +23,33 @@ const { result, loading } = useQuery(
         code
       }
     }
-  `
-)
+  `,
+  { fetchPolicy: "cache-and-network" }
+);
 
 const handleSelect = (value: string): void => {
-  emit('select', value)
-}
+  emit("select", value);
+};
 
 const options = computed(() => {
   if (result.value) {
-    return result.value.countries.map(({ name, code }) => ({
+    return result.value?.countries.map(({ name, code }: stringQueries) => ({
       label: name,
       value: code,
-    }))
+    }));
   }
-  return []
-})
+});
+
+onMounted(() => {
+  // execute the query once the component is mounted
+  void result.value;
+});
 </script>
 
 <template>
   <NSelect
     v-model:value="input"
-    :options="options"
+    :options="options ?? []"
     :loading="loading"
     @update:value="handleSelect"
     filterable
