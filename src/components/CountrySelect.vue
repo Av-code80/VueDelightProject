@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, onMounted } from "vue";
+import { ref, computed } from "vue";
 import { useQuery } from "@vue/apollo-composable";
 import gql from "graphql-tag";
 // ui components:
@@ -38,11 +38,6 @@ const options = computed(() => {
       value: code,
     }));
   }
-});
-
-onMounted(() => {
-  // execute the query once the component is mounted
-  void result.value;
 });
 </script>
 
