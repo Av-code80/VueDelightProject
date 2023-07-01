@@ -13,13 +13,14 @@ const variables = computed(() => ({
   code: props.code,
 }));
 
-const { result, loading } = useQuery(
-  gql`
+
+const GET_COUNTRY_DETAILES = gql`
     query getCountryDetails($code: ID!) {
       country(code: $code) {
         name(lang: "fr")
         capital
         currencies
+        emoji
         languages {
           code
           name
@@ -27,9 +28,8 @@ const { result, loading } = useQuery(
         phones
       }
     }
-  `,
-  variables
-);
+  `
+const { result, loading } = useQuery(GET_COUNTRY_DETAILES, variables);
 </script>
 
 <template id="country-details">
@@ -55,7 +55,7 @@ const { result, loading } = useQuery(
             v-for="currency in result.country.currencies"
             :key="currency"
           >
-            {{ currency }}
+            {{ result.country.emoji }} {{ currency }} 
           </li>
         </ul>
         <h3>Languages:</h3>

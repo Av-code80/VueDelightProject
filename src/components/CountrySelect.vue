@@ -15,17 +15,18 @@ const emit = defineEmits(["select"]);
 
 const input = ref("");
 
-const { result, loading } = useQuery(
-  gql`
-    query getCountries {
-      countries {
-        name(lang: "fr")
-        code
-      }
+const GET_COUNTRIES = gql`
+  query getCountries {
+    countries {
+      name(lang: "fr")
+      code
     }
-  `,
-  { fetchPolicy: "cache-and-network" }
-);
+  }
+`;
+
+const { result, loading } = useQuery(GET_COUNTRIES, {
+  fetchPolicy: "cache-and-network",
+});
 
 const handleSelect = (value: string): void => {
   emit("select", value);
@@ -43,7 +44,7 @@ const options = computed(() => {
 
 <template>
   <NSelect
-    v-model:value="input"
+    v-model?:value="input"
     :options="options ?? []"
     :loading="loading"
     @update:value="handleSelect"

@@ -16,7 +16,9 @@ const handleSelect = (val: string): void => {
 
 <template>
   <NSpace vertical size="large">
-    <HeaderSelect />
+    <NLayout>
+      <HeaderSelect />
+    </NLayout>
     <NLayout content-style="padding:26px">
       <CountrySelect @select="handleSelect" />
     </NLayout>
