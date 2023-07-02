@@ -2,8 +2,10 @@
 import { computed } from "vue";
 import { useQuery } from "@vue/apollo-composable";
 import gql from "graphql-tag";
+import getSymbolFromCurrency from 'currency-symbol-map'
 // ui components:
 import { NSpin } from "naive-ui";
+
 // props:
 const props = defineProps({
   code: String,
@@ -29,7 +31,9 @@ const GET_COUNTRY_DETAILES = gql`
       }
     }
   `
+
 const { result, loading } = useQuery(GET_COUNTRY_DETAILES, variables);
+
 </script>
 
 <template id="country-details">
@@ -55,7 +59,7 @@ const { result, loading } = useQuery(GET_COUNTRY_DETAILES, variables);
             v-for="currency in result.country.currencies"
             :key="currency"
           >
-            {{ result.country.emoji }} {{ currency }} 
+          {{ getSymbolFromCurrency(currency) }} {{ currency }} 
           </li>
         </ul>
         <h3>Languages:</h3>
@@ -84,6 +88,7 @@ const { result, loading } = useQuery(GET_COUNTRY_DETAILES, variables);
 </template>
 
 <style scoped>
+
 img{display:block; margin-left: auto; margin-right: auto;width: 50%;}
 .container {display: flex;align-items: center;justify-content: center;}
 .code {background-color: #f2b807;padding: 6px;text-align: center;color: #3d8e78;border-radius: 4px;}
