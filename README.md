@@ -1,6 +1,6 @@
-# Delight - Développeur Front-End
+# Vue.ts Front-End
 
-Dans le cadre de notre test technique, nous te demandons de réaliser une page web constituée:
+ Exercise: Réaliser une page web constituée:
 
 - d’une dropdown (ou select) permettant de chercher et de sélectionner un pays
 - d’un affichage des principales informations concernant le pays sélectionné

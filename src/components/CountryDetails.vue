@@ -22,7 +22,6 @@ const GET_COUNTRY_DETAILES = gql`
         name(lang: "fr")
         capital
         currencies
-        emoji
         languages {
           code
           name
