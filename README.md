@@ -1,6 +1,6 @@
 # Vue.ts Front-End
 
- Exercise: Réaliser une page web constituée:
+Exercise de Vue.ts : Réaliser une page web constituée:
 
 - d’une dropdown (ou select) permettant de chercher et de sélectionner un pays
 - d’un affichage des principales informations concernant le pays sélectionné
@@ -11,14 +11,14 @@ Voici de plus les contraintes liées à ce projet:
 - Interroger l’API [https://countries.trevorblades.com](https://countries.trevorblades.com/) pour obtenir la liste des pays ainsi que les informations les concernants
 - Le nom des pays doit être affiché en français
 - Les informations à fournir dans le détail d’un pays sont:
-    - nom
-    - drapeau
-    - capital
-    - monnaies (nom & symbole)
-    - langues officielles
-    - préfixes téléphoniques
+  - nom
+  - drapeau
+  - capital
+  - monnaies (nom & symbole)
+  - langues officielles
+  - préfixes téléphoniques
 
-*********************************
+---
 
 # Vue 3 + TypeScript + Vite
 
@@ -38,4 +38,3 @@ If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has a
    1. Run `Extensions: Show Built-in Extensions` from VSCode's command palette
    2. Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
 2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
-# VueDelightProject
